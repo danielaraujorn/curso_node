@@ -1,31 +1,29 @@
-var http = require('http');
+var express = require('express');
 
-var server = http.createServer(function(req, res){
+var app = express();
 
-	var categoria = req.url;
-	if (categoria == '/tecnologia') {
-	
-		res.end("<html><body>Notícias de tecnologia</body></html>");
-	
-	} else if (categoria == '/moda') {
-
-		res.end("<html><body>notícias de moda</body></html>");
-
-	} else if (categoria == '/beleza') {
-
-		res.end("<html><body>Notícias de beleza</body></html>");
-
-	} else {
-	
-	res.end("<html><body>Portal de notícias</body></html>");
-
-	}
+app.set('view engine', 'ejs');
+//app.set();
 
 
+
+app.get('/', function (req, res) {
+	res.render ("home/index");
+});
+
+app.get('/formulario_inclusao_noticia', function (req, res) {
+	res.render ("admin/form_add_noticia");
+});
+
+app.get('/noticias',function (req, res) {
+	res.render("noticias/noticias");
+});
+
+app.get('/noticia', function (req, res) {
+	res.render("noticias/noticia");
 });
 
 
-
-
-
-server.listen(3000);
+app.listen(3000, function () {
+	console.log('Servidor rodando com Express');
+});
